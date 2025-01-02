@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net48;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+        <!-- disable .NET 7 is out of support build warning -->
+        <NoWarn>NETSDK1138</NoWarn>
         <OutputType>Exe</OutputType>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -18,6 +20,14 @@
     <ItemGroup>
         <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
         <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.14.0"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="System.Collections.Immutable" Version="9.*" Condition="'$(TargetFramework)' == 'net9.0'" />
+        <PackageReference Include="System.Collections.Immutable" Version="8.*" Condition="'$(TargetFramework)' == 'net8.0'" />
+        <PackageReference Include="System.Collections.Immutable" Version="7.*" Condition="'$(TargetFramework)' == 'net7.0'" />
+        <PackageReference Include="System.Collections.Immutable" Version="6.*" Condition="'$(TargetFramework)' == 'net6.0'" />
+        <PackageReference Include="System.Collections.Immutable" Version="9.*" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
     </ItemGroup>
 
 </Project>

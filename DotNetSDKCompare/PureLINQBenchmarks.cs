@@ -9,10 +9,10 @@ namespace DotNetSDKCompare;
 [SimpleJob(RuntimeMoniker.Net80, baseline: true)]
 [SimpleJob(RuntimeMoniker.Net70)]
 [SimpleJob(RuntimeMoniker.Net60)]
-[SimpleJob(RuntimeMoniker.Net48)]
+[SimpleJob(RuntimeMoniker.Net481)]
 public class PureLINQBenchmarks
 {
-    private IEnumerable<int> _array = Enumerable.Range(1, 10_000).ToArray();
+    private readonly IEnumerable<int> _array = Enumerable.Range(1, 10_000).ToArray();
 
     [Benchmark]
     public int Count() => _array.Count(i => i > 0);
