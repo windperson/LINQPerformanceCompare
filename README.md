@@ -10,7 +10,14 @@ You need to install [.NET SDk 6 to 9](https://dotnet.microsoft.com/download/dotn
 
 (**Note**: To install .NET 9 SDK on Ubuntu 22.04, you need to [use bash install script to install the .NET 9 SDK](https://blog.dangl.me/archive/installing-net-9-alongside-older-versions-on-ubuntu-2204/))
 
+#### Pure LINQ
 
-On the **DotNETSDKCompare** folder, run the `run_all.ps1` PowerShell script. 
+On the **DotNETSDKCompare** folder, run the `run_purelinq.ps1` PowerShell script. 
 
-It will run all the available tests (.NET 6~9, and .NET Framework v4.8.1 if on Windows) written with [BenchmarkDotNet](http://benchmarkdotnet.org/) and generate a report.
+It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) LINQ [Count()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.count), [All()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.all), [Any()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any), [First()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.first), [Single()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.single), [Last()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.last) benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/) and generate a report.
+
+#### LINQ OrderBy compare with other sorting methods
+
+On the **DotNETSDKCompare** folder, run the `run_sort.ps1` PowerShell script.
+
+It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) [LINQ OrderBy()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderby) and [C# Array.Sort()](https://learn.microsoft.com/dotnet/api/system.array.sort) .NET API sorting methods with some home-made Bubble Sort, Quick Sort algorithms benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/) and generate a report.
