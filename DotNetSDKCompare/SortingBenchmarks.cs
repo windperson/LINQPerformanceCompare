@@ -30,7 +30,7 @@ public class SortingBenchmarks
     [Benchmark(Description = "Bubble Sort")]
     public int[] Self_BubbleSort()
     {
-        if (ArraySize >= 100_000)
+        if (ArraySize > 100_000)
         {
             throw new Exception(
                 "Array size over 100_000 would be extremely slow on benchmark warmup for Bubble Sort. So skipping...");
@@ -94,7 +94,7 @@ public class SortingBenchmarks
     #endregion
 
     // LINQ OrderBy benchmark
-    [Benchmark(Description = "LINQ OrderBy")]
+    [Benchmark(Description = "LINQ OrderBy()")]
     public int[] LINQ_OrderBy()
     {
         var array = (int[])_unsortedArray.Clone(); // Clone to ensure a fresh copy
