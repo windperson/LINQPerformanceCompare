@@ -1,13 +1,16 @@
 ﻿#Requires -Version 7
 param(
-    [string]$BenchmarkFilter = 'DotNetSDKCompare.PureLINQBenchmarks.*'
+    [string]$BenchmarkFilter = 'DotNetSDKCompare.PureLINQBenchmarks.*',
+    [string[]]$NetRuntimes = @('net8.0', 'net9.0', 'net7.0', 'net6.0')
 )
-Set-PSDebug -Trace 1
 $ErrorActionPreference = "Stop"
 if($IsWindows){
-    dotnet run --configuration Release --framework net9.0 -- --runtimes net8.0 net9.0 net7.0 net6.0 net481 --filter $BenchmarkFilter
+    $Runtimes = @($NetRuntimes; 'net481')
 }
 else{
-    dotnet run --configuration Release --framework net9.0 -- --runtimes net8.0 net9.0 net7.0 net6.0 --filter $BenchmarkFilter
+    $Runtimes = $NetRuntimes
 }
-Set-PSDebug -Trace 0
+$run_command =  "dotnet run --configuration Release --framework net9.0 -- --runtimes $Runtimes --filter $BenchmarkFilter"
+Write-Host "Running command:`n$run_command"
+Invoke-Expression $run_command
+exit
