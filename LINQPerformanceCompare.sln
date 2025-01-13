@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetSDKCompare", "DotNetSDKCompare\DotNetSDKCompare.csproj", "{106CAB8A-8D4B-4488-A537-48969BF34FB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQvsManualCoding", "LINQvsManualCoding\LINQvsManualCoding.csproj", "{9FFEDF66-4F11-454D-8BD8-D38846FEEF86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +15,9 @@ Global
 		{106CAB8A-8D4B-4488-A537-48969BF34FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{106CAB8A-8D4B-4488-A537-48969BF34FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{106CAB8A-8D4B-4488-A537-48969BF34FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FFEDF66-4F11-454D-8BD8-D38846FEEF86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FFEDF66-4F11-454D-8BD8-D38846FEEF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FFEDF66-4F11-454D-8BD8-D38846FEEF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFEDF66-4F11-454D-8BD8-D38846FEEF86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
