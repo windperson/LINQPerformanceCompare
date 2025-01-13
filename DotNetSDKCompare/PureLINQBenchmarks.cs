@@ -8,22 +8,19 @@ namespace DotNetSDKCompare;
 [HideColumns("StdDev", "Median", "Job", "RatioSD", "Error", "Alloc Ratio")]
 public class PureLINQBenchmarks
 {
-    private const int _arraySize = 100_000;
-    private readonly IEnumerable<int> _array = Enumerable.Range(1, _arraySize).ToArray();
+    private const int ArraySize = 100_000;
+    private readonly IEnumerable<int> _array = Enumerable.Range(1, ArraySize).ToArray();
 
-    private Func<int, bool> _countLambda = null!;
-    private Func<int, bool> _allLambda = null!;
-    private Func<int, bool> _anyLambda = null!;
-    private Func<int, bool> _firstLambda = null!;
-    private Func<int, bool> _lastLambda = null!;
-    private Func<int, bool> _singleLambda = null!;
+    private readonly Func<int, bool> _countLambda;
+    private readonly Func<int, bool> _allLambda;
+    private readonly Func<int, bool> _anyLambda;
+    private readonly Func<int, bool> _firstLambda;
+    private readonly Func<int, bool> _lastLambda;
+    private readonly Func<int, bool> _singleLambda;
 
-    [GlobalSetup]
-    public void SetupLinqConditions()
+    public PureLINQBenchmarks()
     {
-        var random = new Random();
-
-        var magicNumber = random.Next(1, _arraySize);
+        const int magicNumber = ArraySize / 2;
 
         _countLambda = i => i > magicNumber;
         _allLambda = i => i > magicNumber;
