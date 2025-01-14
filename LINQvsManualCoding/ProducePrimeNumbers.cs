@@ -6,10 +6,11 @@ namespace LINQvsManualCoding;
 [MemoryDiagnoser(displayGenColumns: false)]
 [HideColumns("StdDev", "Median", "Job", "RatioSD", "Error", "Alloc Ratio")]
 [ExecutionValidator(failOnError: true)]
+[ReturnValueValidator]
 public class ProducePrimeNumbers
 {
-    // Input data for sorting algorithms
-    [Params(100, 1_000, 10_000, 100_000, 1000_000)] // Defines the sizes of the arrays to be benchmarked
+    // Defines the upper limit of generated prime numbers
+    [Params(100, 1_000, 10_000, 100_000, 1000_000)]
     // ReSharper disable once UnassignedField.Global
     public int UpperLimit;
 
@@ -25,7 +26,12 @@ public class ProducePrimeNumbers
             return true;
         }
 
-        for (int i = 3; i * i <= number; i += 2)
+        if (number % 2 == 0)
+        {
+            return false;
+        }
+
+        for (var i = 3; i + i <= number; i += 2)
         {
             if (number % i == 0)
             {
@@ -43,7 +49,7 @@ public class ProducePrimeNumbers
     }
 
     [Benchmark(Description = "Parallel LINQ")]
-    public int[] UseLinqWithParallel()
+    public int[] UseParallelLinq()
     {
         return Enumerable.Range(1, UpperLimit).AsParallel().Where(IsPrime).ToArray();
     }
@@ -52,7 +58,7 @@ public class ProducePrimeNumbers
     public int[] UseManualCoding()
     {
         var primeNumbers = new List<int>();
-        for (int i = 1; i <= UpperLimit; i++)
+        for (var i = 1; i <= UpperLimit; i++)
         {
             if (IsPrime(i))
             {
@@ -70,8 +76,8 @@ public class ProducePrimeNumbers
         {
             1 => false,
             2 => true,
-            var c when c % 2 == 0 => false,
-            var c when Enumerable.Range(3, n / 2).Where((n, idx) => idx % 2 == 0).Any(c => n != c && n % c == 0) => false,
+            _ when n % 2 == 0 => false,
+            _ when Enumerable.Range(3, n / 2).Where((_, idx) => idx % 2 == 0).Any(c => n != c && n % c == 0) => false,
             _ => true
         }).ToArray();
     }

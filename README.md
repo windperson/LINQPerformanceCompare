@@ -14,10 +14,26 @@ You need to install [.NET SDk 6 to 9](https://dotnet.microsoft.com/download/dotn
 
 On the **DotNETSDKCompare** folder, run the `run_purelinq.ps1` PowerShell script. 
 
-It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) LINQ [Count()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.count), [All()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.all), [Any()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any), [First()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.first), [Single()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.single), [Last()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.last) benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/) and generate a report.
+It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) LINQ [Count()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.count), [All()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.all), [Any()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any), [First()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.first), [Single()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.single), [Last()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.last) benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/).
+
+On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 15 minutes to finish this benchmarks.
 
 #### LINQ OrderBy compare with other sorting methods
 
 On the **DotNETSDKCompare** folder, run the `run_sort.ps1` PowerShell script.
 
-It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) [LINQ OrderBy()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderby) and [C# Array.Sort()](https://learn.microsoft.com/dotnet/api/system.array.sort) .NET API sorting methods with some home-made Bubble Sort, Quick Sort algorithms benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/) and generate a report.
+It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) [LINQ OrderBy()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderby) and [C# Array.Sort()](https://learn.microsoft.com/dotnet/api/system.array.sort) .NET API sorting methods with some home-made Bubble Sort, Quick Sort algorithms benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/).
+
+On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 40 minutes to finish this benchmarks.
+
+### LINQvsManualCoding
+
+You need to install [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) to run benchmarks.
+
+#### Prime numbers generation with LINQ
+
+On the **LINQvsManualCoding** folder, run the `run_prime.ps1` PowerShell script.
+
+It will run 5 different implementations , some of them using LINQ and Parallel LINQ, C# Switch expression to produce prime number sequences.
+
+On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 40 minutes to finish this benchmarks.
