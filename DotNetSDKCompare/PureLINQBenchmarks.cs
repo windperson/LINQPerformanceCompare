@@ -22,9 +22,8 @@ public class PureLINQBenchmarks
     {
         const int magicNumber = ArraySize / 2;
 
-        _countLambda = i => i > magicNumber;
+        _countLambda = _anyLambda = i => i % magicNumber == 0;
         _allLambda = i => i > magicNumber;
-        _anyLambda = i => i % magicNumber == 0;
         _firstLambda = i => i % magicNumber > magicNumber / 2;
         _lastLambda = i => i % magicNumber <= magicNumber / 2;
         _singleLambda = i => i == magicNumber;
@@ -33,11 +32,11 @@ public class PureLINQBenchmarks
     [Benchmark(Description = "LINQ Count()")]
     public int Count() => _array.Count(_countLambda);
 
-    [Benchmark(Description = "LINQ All()")]
-    public bool All() => _array.All(_allLambda);
-
     [Benchmark(Description = "LINQ Any()")]
     public bool Any() => _array.Any(_anyLambda);
+
+    [Benchmark(Description = "LINQ All()")]
+    public bool All() => _array.All(_allLambda);
 
     [Benchmark(Description = "LINQ First()")]
     public int First() => _array.First(_firstLambda);
@@ -53,5 +52,4 @@ public class PureLINQBenchmarks
 
     [Benchmark(Description = "LINQ Min()")]
     public int Min() => _array.Min();
-
 }
