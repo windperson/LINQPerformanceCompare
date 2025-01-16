@@ -16,7 +16,15 @@ On the **DotNETSDKCompare** folder, run the `run_purelinq.ps1` PowerShell script
 
 It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) LINQ [Count()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.count), [All()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.all), [Any()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any), [First()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.first), [Single()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.single), [Last()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.last) benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/).
 
-On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 15 minutes to finish this benchmarks.
+On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 15 minutes to finish these benchmarks.
+
+#### Compare Collection's built-in Count, Length Property with LINQ Any()
+
+On the **DotNETSDKCompare** folder, run the `run_CollectionPropVsLinqAny.ps1` PowerShell script.
+
+It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) Check C# CLR built-iin Collections' Count or Length Property vs. LINQ [Any()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any) (eq. use Collection.Count > 0 compare Linq.Any()) benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/).
+
+On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around Almost 5 hours to finish these benchmarks.
 
 #### LINQ OrderBy compare with other sorting methods
 
