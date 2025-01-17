@@ -56,43 +56,43 @@ public class CollectionPropVsLinqAny
     #region LINQ Any() benchmarks
 
     [Benchmark(Description = "Array Any()")]
-    [BenchmarkCategory("int[]")]
+    [BenchmarkCategory("int[]", "LINQ")]
     public bool ArrayAny() => _array.Any();
 
     [Benchmark(Description = "List Any()")]
-    [BenchmarkCategory("List<int>")]
+    [BenchmarkCategory("List<int>", "LINQ")]
     public bool ListAny() => _list.Any();
 
     [Benchmark(Description = "SortedList Any()")]
-    [BenchmarkCategory("SortedList<int, string>")]
+    [BenchmarkCategory("SortedList<int, string>", "LINQ")]
     public bool SortedListAny() => _sortedList.Any();
 
     [Benchmark(Description = "LinkedList Any()")]
-    [BenchmarkCategory("LinkedList<int>")]
+    [BenchmarkCategory("LinkedList<int>", "LINQ")]
     public bool LinkedListAny() => _linkedList.Any();
 
     [Benchmark(Description = "HashSet Any()")]
-    [BenchmarkCategory("HashSet<int>")]
+    [BenchmarkCategory("HashSet<int>", "LINQ")]
     public bool HashSetAny() => _hashSet.Any();
 
     [Benchmark(Description = "SortedSet Any()")]
-    [BenchmarkCategory("SortedSet<int>")]
+    [BenchmarkCategory("SortedSet<int>", "LINQ")]
     public bool SortedSetAny() => _sortedSet.Any();
 
     [Benchmark(Description = "Dictionary Any()")]
-    [BenchmarkCategory("Dictionary<int, string>")]
+    [BenchmarkCategory("Dictionary<int, string>", "LINQ")]
     public bool DictionaryAny() => _dictionary.Any();
 
     [Benchmark(Description = "Queue Any()")]
-    [BenchmarkCategory("Queue<int>")]
+    [BenchmarkCategory("Queue<int>", "LINQ")]
     public bool QueueAny() => _queue.Any();
 
     [Benchmark(Description = "Stack Any()")]
-    [BenchmarkCategory("Stack<int>")]
+    [BenchmarkCategory("Stack<int>", "LINQ")]
     public bool StackAny() => _stack.Any();
 
     [Benchmark(Description = "ObservableCollection Any()")]
-    [BenchmarkCategory("ObservableCollection<int>")]
+    [BenchmarkCategory("ObservableCollection<int>", "LINQ")]
     public bool ObservableCollectionAny() => _observableCollection.Any();
 
     #endregion
@@ -100,43 +100,43 @@ public class CollectionPropVsLinqAny
     #region Built-in Property benchmarks
 
     [Benchmark(Description = "Array Length > 0")]
-    [BenchmarkCategory("int[]")]
+    [BenchmarkCategory("int[]", "Built-in Property")]
     public bool ArrayLength() => _array.Length > 0;
 
     [Benchmark(Description = "List Count > 0")]
-    [BenchmarkCategory("List<int>")]
+    [BenchmarkCategory("List<int>", "Built-in Property")]
     public bool ListCount() => _list.Count > 0;
 
     [Benchmark(Description = "SortedList Count > 0")]
-    [BenchmarkCategory("SortedList<int, string>")]
+    [BenchmarkCategory("SortedList<int, string>", "Built-in Property")]
     public bool SortedListCount() => _sortedList.Count > 0;
 
     [Benchmark(Description = "LinkedList Count > 0")]
-    [BenchmarkCategory("LinkedList<int>")]
+    [BenchmarkCategory("LinkedList<int>", "Built-in Property")]
     public bool LinkedListCount() => _linkedList.Count > 0;
 
     [Benchmark(Description = "HashSet Count > 0")]
-    [BenchmarkCategory("HashSet<int>")]
+    [BenchmarkCategory("HashSet<int>", "Built-in Property")]
     public bool HashSetCount() => _hashSet.Count > 0;
 
     [Benchmark(Description = "SortedSet Count > 0")]
-    [BenchmarkCategory("SortedSet<int>")]
+    [BenchmarkCategory("SortedSet<int>", "Built-in Property")]
     public bool SortedSetCount() => _sortedSet.Count > 0;
 
     [Benchmark(Description = "Dictionary Count > 0")]
-    [BenchmarkCategory("Dictionary<int, string>")]
+    [BenchmarkCategory("Dictionary<int, string>", "Built-in Property")]
     public bool DictionaryCount() => _dictionary.Count > 0;
 
     [Benchmark(Description = "Queue Count > 0")]
-    [BenchmarkCategory("Queue<int>")]
+    [BenchmarkCategory("Queue<int>", "Built-in Property")]
     public bool QueueCount() => _queue.Count > 0;
 
     [Benchmark(Description = "Stack Count > 0")]
-    [BenchmarkCategory("Stack<int>")]
+    [BenchmarkCategory("Stack<int>", "Built-in Property")]
     public bool StackCount() => _stack.Count > 0;
 
     [Benchmark(Description = "ObservableCollection Count > 0")]
-    [BenchmarkCategory("ObservableCollection<int>")]
+    [BenchmarkCategory("ObservableCollection<int>", "Built-in Property")]
     public bool ObservableCollectionCount() => _observableCollection.Count > 0;
 
     #endregion

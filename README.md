@@ -24,6 +24,8 @@ On the **DotNETSDKCompare** folder, run the `run_CollectionPropVsLinqAny.ps1` Po
 
 It will run all the available (.NET 6~9, and .NET Framework v4.8.1 if on Windows) Check C# CLR built-iin Collections' Count or Length Property vs. LINQ [Any()](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any) (eq. use Collection.Count > 0 compare Linq.Any()) benchmarks written with [BenchmarkDotNet](http://benchmarkdotnet.org/).
 
+The purpose of this benchmark is to prove the [CA1860: Avoid using 'Enumerable.Any()' extension method](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1860) rule.
+
 On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around Almost 5 hours to finish these benchmarks.
 
 #### LINQ OrderBy compare with other sorting methods
