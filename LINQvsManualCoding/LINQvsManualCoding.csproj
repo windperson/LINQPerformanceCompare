@@ -9,6 +9,9 @@
     <Optimize>true</Optimize>
     <Configuration>Release</Configuration>
     <IsPackable>false</IsPackable>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>

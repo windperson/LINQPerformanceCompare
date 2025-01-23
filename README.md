@@ -44,6 +44,8 @@ You need to install [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.
 
 On the **LINQvsManualCoding** folder, run the `run_prime.ps1` PowerShell script.
 
-It will run 5 different implementations , some of them using LINQ and Parallel LINQ, C# Switch expression to produce prime number sequences.
+It will run 5 different implementations, some of them using LINQ and Parallel LINQ, C# Switch expression to produce prime number sequences.
 
 On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 40 minutes to finish this benchmarks.
+
+After it finishes, it contains an additional IL Code Disassembler report document `LINQvsManualCoding.ProducePrimeNumbers-asm.md` in results folder.
