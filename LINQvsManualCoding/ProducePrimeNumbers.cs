@@ -3,7 +3,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace LINQvsManualCoding;
 
-[DisassemblyDiagnoser(printSource: true)]
 [MemoryDiagnoser(displayGenColumns: false)]
 [HideColumns("StdDev", "Median", "Job", "RatioSD", "Error", "Alloc Ratio")]
 [ExecutionValidator(failOnError: true)]
