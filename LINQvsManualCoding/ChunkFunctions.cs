@@ -2,11 +2,15 @@
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Order;
+using HPCsharp.ParallelAlgorithms;
 
 namespace LINQvsManualCoding;
 
 [MemoryDiagnoser(displayGenColumns: true)]
-[HideColumns("StdDev", "Median", "Job", "Ratio", "RatioSD", "Error", "Alloc Ratio")]
+[HideColumns("StdDev", "Median", "Job", "RatioSD", "Error", "Alloc Ratio")]
+[CategoriesColumn]
+[Orderer(SummaryOrderPolicy.Declared)]
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByJob, BenchmarkLogicalGroupRule.ByCategory)]
 [ReturnValueValidator(failOnError: true)]
 public class ChunkFunctions
@@ -16,7 +20,7 @@ public class ChunkFunctions
     // ReSharper disable InconsistentNaming
     public int Source_Count;
 
-    [Params(7, 10, 51, 100, 333)] public int Chunk_Size;
+    [Params(7, 51, 100, 333)] public int Chunk_Size;
     // ReSharper restore InconsistentNaming
     // ReSharper restore UnassignedField.Global
 
@@ -42,15 +46,15 @@ public class ChunkFunctions
 
     #region Using LINQ
 
-    [Benchmark(Description = "LINQ Chunk()")]
-    [BenchmarkCategory("Array<T>")]
+    [Benchmark(Description = "LINQ Chunk()", Baseline = true)]
+    [BenchmarkCategory("Array")]
     public int ArrayUseLinqChunk()
     {
         var chunks = _people.Chunk(Chunk_Size);
         return chunks.Count();
     }
 
-    [Benchmark(Description = "LINQ Chunk()")]
+    [Benchmark(Description = "LINQ Chunk()", Baseline = true)]
     [BenchmarkCategory("List<T>")]
     public int ListUseLinqChunk()
     {
@@ -62,15 +66,15 @@ public class ChunkFunctions
 
     #region Using Slice()
 
-    [Benchmark(Description = "Memory<T>")]
-    [BenchmarkCategory("Array<T>")]
+    [Benchmark(Description = "Use Memory<T>")]
+    [BenchmarkCategory("Array")]
     public int ArrayUseSlice()
     {
         var chunks = _people.AsMemory().Chunk(Chunk_Size);
         return chunks.Count();
     }
 
-    [Benchmark(Description = "ReadOnlyMemory<T>")]
+    [Benchmark(Description = "Use ReadOnlyMemory<T>")]
     [BenchmarkCategory("List<T>")]
     public int ListUseSlice()
     {
@@ -78,11 +82,19 @@ public class ChunkFunctions
         return chunks.Count();
     }
 
-    [Benchmark(Description = "ReadOnlyMemory<T> Parallel")]
+    [Benchmark(Description = "ToArray ReadOnlyMemory<T>")]
     [BenchmarkCategory("List<T>")]
-    public int ListParallelToArrayUseSlice()
+    public int ListToArrayUseSlice()
     {
-        var chunks = _peopleList.AsReadOnly().AsReadOnlyMemory().Chunk(Chunk_Size);
+        var chunks = _peopleList.ToArrayAsReadOnlyMemory().Chunk(Chunk_Size);
+        return chunks.Count();
+    }
+
+    [Benchmark(Description = "ReadOnlyMemory<T> Par")]
+    [BenchmarkCategory("List<T>")]
+    public int ListToArrayParUseSlice()
+    {
+        var chunks = _peopleList.AsReadOnlyMemoryPar().Chunk(Chunk_Size);
         return chunks.Count();
     }
 
@@ -99,7 +111,7 @@ public class ChunkFunctions
     }
 
     [Benchmark(Description = "Queue Implement")]
-    [BenchmarkCategory("List")]
+    [BenchmarkCategory("List<T>")]
     public int ListUseCustomChunk()
     {
         var chunks = _peopleList.ChunkUsingQueue(Chunk_Size);
@@ -131,9 +143,15 @@ public static class ReadOnlyMemoryOfTExtension
         return new ReadOnlyMemory<T>(items, 0, list.Count);
     }
 
-    public static ReadOnlyMemory<T> AsReadOnlyMemory<T>(this ReadOnlyCollection<T> source)
+    public static ReadOnlyMemory<T> ToArrayAsReadOnlyMemory<T>(this List<T> list)
     {
-        var items = source.AsParallel().ToArray();
+        var items = list.ToArray();
+        return new ReadOnlyMemory<T>(items);
+    }
+
+    public static ReadOnlyMemory<T> AsReadOnlyMemoryPar<T>(this List<T> list)
+    {
+        var items = list.ToArrayPar();
         return new ReadOnlyMemory<T>(items);
     }
 }

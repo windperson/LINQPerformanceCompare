@@ -25,5 +25,17 @@
         <PackageReference Include="System.Collections.Immutable" Version="6.*" Condition="'$(TargetFramework)' == 'net6.0'" />
         <PackageReference Include="System.Collections.Immutable" Version="9.*" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Remove="BenchmarkDotNet.Artifacts\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Remove="BenchmarkDotNet.Artifacts\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Remove="BenchmarkDotNet.Artifacts\**" />
+    </ItemGroup>
 
 </Project>
