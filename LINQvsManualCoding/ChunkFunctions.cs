@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.ObjectModel;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 
@@ -6,11 +7,11 @@ namespace LINQvsManualCoding;
 
 [MemoryDiagnoser(displayGenColumns: true)]
 [HideColumns("StdDev", "Median", "Job", "Ratio", "RatioSD", "Error", "Alloc Ratio")]
-[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByJob)]
+[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByJob, BenchmarkLogicalGroupRule.ByCategory)]
 [ReturnValueValidator(failOnError: true)]
 public class ChunkFunctions
 {
-    [Params(1_000, 10_000, 50_000, 100_000, 1_000_000, Priority = -1)]
+    [Params(500, 1_000, 10_000, 100_000, 1_000_000, Priority = -1)]
     // ReSharper disable UnassignedField.Global
     // ReSharper disable InconsistentNaming
     public int Source_Count;
@@ -77,6 +78,14 @@ public class ChunkFunctions
         return chunks.Count();
     }
 
+    [Benchmark(Description = "ReadOnlyMemory<T> Parallel")]
+    [BenchmarkCategory("List<T>")]
+    public int ListParallelToArrayUseSlice()
+    {
+        var chunks = _peopleList.AsReadOnly().AsReadOnlyMemory().Chunk(Chunk_Size);
+        return chunks.Count();
+    }
+
     #endregion
 
     #region Manual Coding using Queue
@@ -114,10 +123,18 @@ public static class ReadOnlyMemoryOfTExtension
     // Modified version of https://github.com/dotnet/runtime/discussions/87210#discussioncomment-10157536
     public static ReadOnlyMemory<T> AsReadOnlyMemory<T>(this List<T> list)
     {
+        // Note: This may break when the internal implementation of List<T> changes,
+        // and also it may crash upon List has been modified after getting the ReadOnlyMemory<T> return object.
         var items =
             (T[])list.GetType().GetField("_items", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(list)!;
 
         return new ReadOnlyMemory<T>(items, 0, list.Count);
+    }
+
+    public static ReadOnlyMemory<T> AsReadOnlyMemory<T>(this ReadOnlyCollection<T> source)
+    {
+        var items = source.AsParallel().ToArray();
+        return new ReadOnlyMemory<T>(items);
     }
 }
 
