@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net9.0;net8.0;net7.0;net6.0</TargetFrameworks>
+    <!-- disable .NET 7 is out of support build warning -->
+    <NoWarn>NETSDK1138</NoWarn>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
-    <Optimize>true</Optimize>
     <Configuration>Release</Configuration>
     <IsPackable>false</IsPackable>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -15,7 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+    <PackageReference Include="Bogus" Version="35.6.1" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
   </ItemGroup>
 
 </Project>

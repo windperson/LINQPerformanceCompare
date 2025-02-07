@@ -10,7 +10,6 @@
         <Nullable>enable</Nullable>
         <DebugType>pdbonly</DebugType>
         <DebugSymbols>true</DebugSymbols>
-        <Optimize>true</Optimize>
         <Configuration>Release</Configuration>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
