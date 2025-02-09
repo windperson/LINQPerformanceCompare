@@ -11,7 +11,8 @@ namespace LINQvsManualCoding;
 [HideColumns("StdDev", "Median", "Job", "RatioSD", "Error", "Alloc Ratio")]
 [CategoriesColumn]
 [Orderer(SummaryOrderPolicy.Declared)]
-[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByJob, BenchmarkLogicalGroupRule.ByCategory)]
+[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory, BenchmarkLogicalGroupRule.ByParams,
+    BenchmarkLogicalGroupRule.ByJob)]
 [ReturnValueValidator(failOnError: true)]
 public class ChunkFunctions
 {

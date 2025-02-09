@@ -47,3 +47,21 @@ On the **LINQvsManualCoding** folder, run the `run_prime.ps1` PowerShell script.
 It will run 5 different implementations, some of them using LINQ and Parallel LINQ, C# Switch expression to produce prime number sequences.
 
 On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 40 minutes to finish this benchmarks.
+
+#### LINQ Chunk function vs. Manual Coding
+
+On the **LINQvsManualCoding** folder, the `run_chunk.ps1` PowerShell script can benchmark various ways to split a list(`List<T>`) or array(`T[]`) into chunks of sub arrays include the LINQ [`Chunk()`](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.chunk) method that added since .NET 6.
+
+* To run List<T> chunking benchmarks:
+    ```powershell
+    ./run_chunk.ps1 -AdditionalParameters '--anyCategories List<T>'
+    ```
+    On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 45 minutes to finish this benchmarks.
+
+* To run Array chunking benchmarks:
+    ```powershell
+    ./run_chunk.ps1 -AdditionalParameters '--anyCategories Array'
+    ```
+    On a Intel Core i9-13900H CPU @ 2.50GHz, 64GB RAM, Windows 11 24h2 system, it will take around 40 minutes to finish this benchmarks.
+
+You can also add  `-NetRuntimes @('net8.0','net9.0')` to run on both .NET 8 and .NET 9.0 CLR runtimes to see performance difference. 
