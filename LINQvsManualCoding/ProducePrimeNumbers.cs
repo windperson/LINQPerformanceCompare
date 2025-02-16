@@ -54,7 +54,7 @@ public class ProducePrimeNumbers
         return Enumerable.Range(1, UpperLimit).AsParallel().Where(IsPrime).ToArray();
     }
 
-    [Benchmark(Description = "Use for loop")]
+    [Benchmark(Description = "Use for loop", Baseline = true)]
     public int[] UseManualCoding()
     {
         var primeNumbers = new List<int>();
